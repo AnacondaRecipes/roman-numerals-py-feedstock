@@ -10,32 +10,43 @@ source:
 
 build:
   number: 0
-  noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip: true  # [py<39]
 
 requirements:
   host:
-    - python {{ python_min }}
+    - python
     - pip
     - flit-core >=3.7
   run:
-    - python >={{ python_min }}
+    - python
 
 test:
+  source_files:
+    - tests
   imports:
     - roman_numerals
   commands:
     - pip check
+    - ls
+    - pytest -vv .
   requires:
-    - python {{ python_min }}
+    - python
     - pip
+    - pytest
 
 about:
   home: https://github.com/AA-Turner/roman-numerals
   license: 0BSD OR CC0-1.0
+  license_family: BSD
   license_file: LICENCE.rst
   summary: Manipulate well-formed Roman numerals
+  description: |
+    This project provides utilities manipulating well-formed Roman 
+    numerals, in various programming languages. Currently, 
+    there are implementations in Python and Rust.
   dev_url: https://github.com/AA-Turner/roman-numerals
+  doc_url: https://github.com/AA-Turner/roman-numerals/blob/master/README.rst
 
 extra:
   recipe-maintainers:
