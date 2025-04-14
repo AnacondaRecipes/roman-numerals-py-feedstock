@@ -28,7 +28,6 @@ test:
     - roman_numerals
   commands:
     - pip check
-    - ls
     - pytest -vv .
   requires:
     - python
